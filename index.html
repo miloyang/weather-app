@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1 class="text-bg-primary p-3">Weather Dashboard</h1>
+    </header>
+
+    <main>
+        <aside class="container aside">
+            <div class="search-bar" id="search-bar">
+                <form>
+                    <legend>Search for a City:</legend>
+                    <div class="mb-3">
+                        <input type="text" id="TextInput" class="form-control" placeholder="Sydney">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+
+            <br>
+
+            <div class="btn-group-vertical" role="group" aria-label="Vertical button group" id="city-Btn">
+                <button type="button" class="btn btn-primary" id="Sydney">Sydney</button>
+                <button type="button" class="btn btn-primary" id="Melbourne">Melbourne</button>
+                <button type="button" class="btn btn-primary" id="Brisbane">Brisbane</button>
+                <button type="button" class="btn btn-primary" id="Canberra">Canberra</button>
+                <button type="button" class="btn btn-primary" id="Adelaide">Adelaide</button>
+                <button type="button" class="btn btn-primary" id="Perth">Perth</button>
+                <button type="button" class="btn btn-primary" id="Tasmania">Tasmania</button>
+                <button type="button" class="btn btn-primary" id="Darwin">Darwin</button>
+            </div>
+        </aside>
+
+        <article class="container display">
+            <div class="container current-search">
+                <h2>Hello</h2>
+
+            </div>
+
+            <div class="container 5-day">
+                <h3>Hi there</h3>
+
+            </div>
+
+        </article>
+
+
+
+
+    </main>
+
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
