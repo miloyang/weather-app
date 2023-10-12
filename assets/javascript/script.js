@@ -16,10 +16,10 @@ const apiKey = 'f8291849ba2ba581c967f471c596323b';
 
 let userInput = function (event) {
     event.preventDefault();
-    const inputValue = textInput.value
-    const country = counrtyCode.value
-    getCurrentWeather(inputValue, country)
-    getForecast(inputValue, country)
+    const inputValue = textInput.value;
+    const country = counrtyCode.value;
+    getCurrentWeather(inputValue, country);
+    getForecast(inputValue, country);
 }
 
 let getCurrentWeather = function (city, country) {
@@ -61,9 +61,9 @@ let getForecast = function (city, country) {
 
                 // let date = new Date() + 1;
 
-                // const dateEl = document.createElement('h5');
-                // // dateEl.textContent = data.list[8].dt.toLocaleDateString();
-                // dateEl.textContent = date.toLocaleDateString();
+                const dateEl = document.createElement('h5');
+                // dateEl.textContent = data.list[8].dt.toLocaleDateString();
+                dateEl.textContent = data.list[8].dt;
 
                 let iconCode = data.list[8].weather[0].icon;
                 let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
@@ -84,9 +84,10 @@ let getForecast = function (city, country) {
                 // fiveDay.append(h1)
 
 
+                innerDiv.append(cityEl, dateEl, imgEl, tempEl, windEl, humidityEl);
+                let divEl = cardDiv.appendChild(innerDiv);
+                fiveDay.append(divEl);
 
-                let divEl = cardDiv.append(innerDiv);
-                divEl.append(h4);
             }
 
 
@@ -104,7 +105,7 @@ let getForecast = function (city, country) {
         })
 }
 
-searchBtn.addEventListener('submit', userInput)
+searchBtn.addEventListener('submit', userInput);
 
 
 
