@@ -52,56 +52,49 @@ let getForecast = function (city, country) {
         .then(function (data) {
             console.log(data);
 
-            for (let i = 0; i < 5; i++) {
-                const cardDiv = document.createElement('div');
-                const innerDiv = document.createElement('div');
+            for (let i = 0; i < data.list.length; i++) {
 
-                const cityEl = document.createElement('h4');
-                cityEl.textContent = data.city.name;
+                if ((i + 1) % 8 === 0) {
+                    const cardDiv = document.createElement('div');
+                    const innerDiv = document.createElement('div');
 
-                // let date = new Date() + 1;
+                    const cityEl = document.createElement('h4');
+                    cityEl.textContent = data.city.name;
 
-                const dateEl = document.createElement('h5');
-                // dateEl.textContent = data.list[8].dt.toLocaleDateString();
-                dateEl.textContent = data.list[8].dt;
+                    // let date = new Date();
+                    // let timeStamp = data.list[i].dt;
 
-                let iconCode = data.list[8].weather[0].icon;
-                let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
-                const imgEl = document.createElement('img');
-                imgEl.setAttribute('src', iconUrl);
-
-                const tempEl = document.createElement('p');
-                tempEl.textContent = data.list[8].main.temp;
-
-                const windEl = document.createElement('p');
-                windEl.textContent = data.list[8].wind.speed;
-
-                const humidityEl = document.createElement('p');
-                humidityEl.textContent = data.list[8].main.humidity;
-
-                // const h1 = document.createElement('h1')    
-                // h1.textContent = "hello"
-                // fiveDay.append(h1)
+                    const dateEl = document.createElement('h5');
+                    // dateEl.textContent = data.list[i].dt.toLocaleDateString(i);
+                    // dateEl.textContent = date.toLocaleDateString(timeStamp);
+                    dateEl.textContent = data.list[i].dt_txt;
 
 
-                innerDiv.append(cityEl, dateEl, imgEl, tempEl, windEl, humidityEl);
-                let divEl = cardDiv.appendChild(innerDiv);
-                fiveDay.append(divEl);
+                    let iconCode = data.list[i].weather[0].icon;
+                    let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+                    const imgEl = document.createElement('img');
+                    imgEl.setAttribute('src', iconUrl);
 
+                    const tempEl = document.createElement('p');
+                    tempEl.textContent = data.list[i].main.temp;
+
+                    const windEl = document.createElement('p');
+                    windEl.textContent = data.list[i].wind.speed;
+
+                    const humidityEl = document.createElement('p');
+                    humidityEl.textContent = data.list[i].main.humidity;
+
+                    // const h1 = document.createElement('h1')    
+                    // h1.textContent = "hello"
+                    // fiveDay.append(h1)
+
+                    innerDiv.append(cityEl, dateEl, imgEl, tempEl, windEl, humidityEl);
+                    let divEl = cardDiv.appendChild(innerDiv);
+                    fiveDay.append(divEl);
+
+                }
             }
 
-
-            // let cDate = new Date()
-            // let iconcode = data.weather[0].icon
-
-            // var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
-            // weatherIcon.setAttribute('src', iconurl)
-            // currentCity.textContent = data.name;
-            // currentDate.textContent = cDate.toLocaleDateString()
-
-            // currentTemperature.textContent = "Temp: " + data.main.temp;
-            // currentWind.textContent = "Wind: " + data.wind.speed;
-            // currentHumidity.textContent = "Humidity: " + data.main.humidity;
         })
 }
 
