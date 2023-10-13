@@ -1,7 +1,7 @@
 let searchBtn = document.querySelector('#search-form');
 let textInput = document.querySelector('#textInput');
-let history = document.querySelector('#history');
-let historyList = document.querySelector('#historyList');
+let historyEl = document.querySelector('.history');
+let historyList = document.querySelector('.historyList');
 let currentCity = document.querySelector('.current-city');
 let currentDate = document.querySelector('.current-date');
 let weatherIcon = document.querySelector('#icon');
@@ -14,10 +14,13 @@ let counrtyCode = document.querySelector('#country');
 const apiKey = 'f8291849ba2ba581c967f471c596323b';
 
 
-let userInput = function (event) {
-    event.preventDefault();
+let userInput = function () {
     const inputValue = textInput.value;
     const country = counrtyCode.value;
+
+    // Clearing the previous search results
+    fiveDay.innerHTML = '';
+
     getCurrentWeather(inputValue, country);
     getForecast(inputValue, country);
 }
@@ -91,7 +94,6 @@ let getForecast = function (city, country) {
                     innerDiv.append(cityEl, dateEl, imgEl, tempEl, windEl, humidityEl);
                     let divEl = cardDiv.appendChild(innerDiv);
                     fiveDay.append(divEl);
-
                 }
             }
 
@@ -100,39 +102,67 @@ let getForecast = function (city, country) {
 
 searchBtn.addEventListener('submit', userInput);
 
+let previousSearch = JSON.parse(localStorage.getItem("previousSearch")) || [];
+
+searchBtn.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    historyEl.classList.add('hide');
+
+    if (textInput.value === '' || previousSearch.indexOf(textInput.value) !== -1) {
+        return;
+    }
+
+    previousSearch.unshift(textInput.value);
+
+    localStorage.setItem('previousSearch', JSON.stringify(previousSearch));
+
+    showHistory();
+
+    // Only showing the last 5 search history 
+    if (previousSearch.length > 5) {
+        previousSearch.pop();
+    }
+
+    textInput.value = '';
+})
+
+textInput.addEventListener('click', function () {
+    historyEl.classList.remove('hide');
+})
+
+function showHistory() {
+    historyList.innerHTML = '';
+
+    for (let i = 0; i < previousSearch.length; i++) {
+        let newDiv = document.createElement('div');
+        newDiv.classList.add('historyItem');
+
+        let iconEl = document.createElement('i');
+        iconEl.setAttribute('class', 'fa-regular fa-clock');
+
+        let aEl = document.createElement('a');
+        aEl.textContent = previousSearch[i];
+        aEl.href = '#';
+
+        aEl.addEventListener('click', function (event) {
+            userInput(previousSearch[i]);
+        });
+
+        // (function (value) {
+        //     aEl.addEventListener('click', function (event) {
+        //         event.preventDefault();
+        //         userInput(value);
+        //     });
+        // })(previousSearch[i]);
+
+        newDiv.append(iconEl, aEl);
+        historyList.appendChild(newDiv);
+    }
+}
+
+showHistory();
 
 
 
 
-
-
-
-
-
-
-
-
-// // Function to get weather data from OpenWeatherMap API
-// const getWeatherData = async (url) => {
-//     try {
-//         const response = await fetch(url);
-//         const data = await response.json();
-//         return data;
-//     } catch (error) {
-//         console.error('Error fetching weather data:', error);
-//     }
-// };
-
-// // Function to update the weather information on the page
-// const updateWeatherInfo = async (location) => {
-//     const weatherInfoElement = $('#weather-info');
-//     weatherInfoElement[0].classList.remove('hide');
-//     const weatherData = await getWeatherData(`https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lng}&appid=${apiKey}&units=metric`);
-//     if (weatherData) {
-//         const temperature = weatherData.main.temp;
-//         const description = weatherData.weather[0].description;
-
-//         const weatherInfo = `Temperature: ${temperature}°C, ${description}`;
-//         weatherInfoElement[0].textContent = weatherInfo;
-//     }
-// };
