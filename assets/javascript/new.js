@@ -13,46 +13,48 @@ let counrtyCode = document.querySelector('#country');
 
 const apiKey = 'f8291849ba2ba581c967f471c596323b';
 
-let city = function (cityName) {
-    const inputValue = cityName || textInput.value;
+let city = function () {
+    const inputValue = textInput.value;
 
     // Clearing the previous search results
     fiveDay.innerHTML = '';
 
     getCurrentWeather(inputValue);
     getForecast(inputValue);
-};
+}
 
 let getCurrentWeather = function (city) {
-    let queryURL =
-        'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&appid=' + apiKey;
+    let queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=" + apiKey;
     fetch(queryURL)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
+            // console.log(data);
             let cDate = new Date();
             let iconCode = data.weather[0].icon;
 
-            var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+            var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
             weatherIcon.setAttribute('src', iconUrl);
             currentCity.textContent = data.name;
             currentDate.textContent = cDate.toLocaleDateString();
-            currentTemperature.textContent = 'Temp: ' + data.main.temp;
-            currentWind.textContent = 'Wind: ' + data.wind.speed;
-            currentHumidity.textContent = 'Humidity: ' + data.main.humidity;
-        });
-};
+            currentTemperature.textContent = "Temp: " + data.main.temp;
+            currentWind.textContent = "Wind: " + data.wind.speed;
+            currentHumidity.textContent = "Humidity: " + data.main.humidity;
+        })
+}
 
 let getForecast = function (city) {
-    let queryURL =
-        'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=metric&appid=' + apiKey;
+    let queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=" + apiKey;
     fetch(queryURL)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
+            console.log(data);
+
             for (let i = 0; i < data.list.length; i++) {
+
                 if ((i + 1) % 8 === 0) {
                     const cardDiv = document.createElement('div');
                     const innerDiv = document.createElement('div');
@@ -60,12 +62,15 @@ let getForecast = function (city) {
                     const cityEl = document.createElement('h4');
                     cityEl.textContent = data.city.name;
 
+                    // let date = new Date();
+                    // let timeStamp = data.list[i].dt;
+
                     const dateEl = document.createElement('h5');
                     dateEl.textContent = data.list[i].dt_txt;
 
+
                     let iconCode = data.list[i].weather[0].icon;
-                    let iconUrl =
-                        'http://openweathermap.org/img/w/' + iconCode + '.png';
+                    let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
                     const imgEl = document.createElement('img');
                     imgEl.setAttribute('src', iconUrl);
 
@@ -83,15 +88,13 @@ let getForecast = function (city) {
                     fiveDay.append(divEl);
                 }
             }
-        });
-};
 
-searchBtn.addEventListener('submit', function (event) {
-    event.preventDefault();
-    city();
-});
+        })
+}
 
-let previousSearch = JSON.parse(localStorage.getItem('previousSearch')) || [];
+searchBtn.addEventListener('submit', city);
+
+let previousSearch = JSON.parse(localStorage.getItem("previousSearch")) || [];
 
 searchBtn.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -108,24 +111,27 @@ searchBtn.addEventListener('submit', function (event) {
 
     showHistory();
 
-    // Only showing the last 5 search history
-    if (previousSearch.length > 4) {
+    // Only showing the last 5 search history 
+    if (previousSearch.length > 5) {
         previousSearch.pop();
     }
 
     textInput.value = '';
-});
+})
 
 textInput.addEventListener('click', function () {
     historyEl.classList.remove('hide');
-});
+})
 
 function showHistory() {
     historyList.innerHTML = '';
 
     for (let i = 0; i < previousSearch.length; i++) {
-        let newDiv = document.createElement('li');
+        let newDiv = document.createElement('div');
         newDiv.classList.add('historyItem');
+
+        let iconEl = document.createElement('i');
+        iconEl.setAttribute('class', 'fa-regular fa-clock');
 
         let aEl = document.createElement('a');
         aEl.textContent = previousSearch[i];
@@ -136,9 +142,13 @@ function showHistory() {
             city(previousSearch[i]);
         });
 
-        newDiv.appendChild(aEl);
+        newDiv.append(iconEl, aEl);
         historyList.appendChild(newDiv);
     }
 }
 
 showHistory();
+
+
+
+
