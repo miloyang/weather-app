@@ -58,10 +58,10 @@ let getForecast = function (city) {
                     const cardDiv = document.createElement('div');
                     const innerDiv = document.createElement('div');
 
-                    const cityEl = document.createElement('h4');
-                    cityEl.textContent = data.city.name;
+                    // const cityEl = document.createElement('h4');
+                    // cityEl.textContent = data.city.name;
 
-                    const dateEl = document.createElement('h5');
+                    const dateEl = document.createElement('h4');
                     dateEl.textContent = data.list[i].dt_txt;
 
                     let iconCode = data.list[i].weather[0].icon;
@@ -79,7 +79,7 @@ let getForecast = function (city) {
                     const humidityEl = document.createElement('p');
                     humidityEl.textContent = "Humidity: " + data.list[i].main.humidity + " %";
 
-                    innerDiv.append(cityEl, dateEl, imgEl, tempEl, windEl, humidityEl);
+                    innerDiv.append(dateEl, imgEl, tempEl, windEl, humidityEl);
                     let divEl = cardDiv.appendChild(innerDiv);
                     fiveDay.append(divEl);
                 }
@@ -131,7 +131,7 @@ function showHistory() {
         let newDiv = document.createElement('li');
         newDiv.classList.add('historyItem');
 
-        let aEl = document.createElement('a');
+        let aEl = document.createElement('button');
         aEl.textContent = previousSearch[i];
         aEl.href = '#';
 
