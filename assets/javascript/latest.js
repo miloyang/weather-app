@@ -50,8 +50,8 @@ let getCurrentWeather = function (city) {
             weatherIcon.setAttribute('src', iconUrl);
             currentCity.textContent = data.name;
             currentDate.textContent = cDate.toLocaleDateString();
-            currentTemperature.textContent = "Temp: " + data.main.temp;
-            currentWind.textContent = "Wind: " + data.wind.speed;
+            currentTemperature.textContent = "Temp: " + data.main.temp + " C";
+            currentWind.textContent = "Wind Speed: " + data.wind.speed;
             currentHumidity.textContent = "Humidity: " + data.main.humidity;
         })
 }

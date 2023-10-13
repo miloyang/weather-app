@@ -9,7 +9,7 @@ let currentTemperature = document.querySelector('.current-temperature');
 let currentWind = document.querySelector('.current-wind');
 let currentHumidity = document.querySelector('.current-humidity');
 let fiveDay = document.querySelector('.five-day-forecast');
-let counrtyCode = document.querySelector('#country');
+// let counrtyCode = document.querySelector('#country');
 
 const apiKey = 'f8291849ba2ba581c967f471c596323b';
 
@@ -38,9 +38,9 @@ let getCurrentWeather = function (city) {
             weatherIcon.setAttribute('src', iconUrl);
             currentCity.textContent = data.name;
             currentDate.textContent = cDate.toLocaleDateString();
-            currentTemperature.textContent = 'Temp: ' + data.main.temp;
-            currentWind.textContent = 'Wind: ' + data.wind.speed;
-            currentHumidity.textContent = 'Humidity: ' + data.main.humidity;
+            currentTemperature.textContent = 'Temp: ' + data.main.temp + " 'C";
+            currentWind.textContent = 'Wind Speed: ' + data.wind.speed + " m/s";
+            currentHumidity.textContent = 'Humidity: ' + data.main.humidity + " %";
         });
 };
 
@@ -52,6 +52,7 @@ let getForecast = function (city) {
             return response.json();
         })
         .then(function (data) {
+            console.log(data);
             for (let i = 0; i < data.list.length; i++) {
                 if ((i + 1) % 8 === 0) {
                     const cardDiv = document.createElement('div');
@@ -70,13 +71,13 @@ let getForecast = function (city) {
                     imgEl.setAttribute('src', iconUrl);
 
                     const tempEl = document.createElement('p');
-                    tempEl.textContent = data.list[i].main.temp;
+                    tempEl.textContent = "Temp: " + data.list[i].main.temp + " 'C";
 
                     const windEl = document.createElement('p');
-                    windEl.textContent = data.list[i].wind.speed;
+                    windEl.textContent = "Wind Speed: " + data.list[i].wind.speed + " m/s";
 
                     const humidityEl = document.createElement('p');
-                    humidityEl.textContent = data.list[i].main.humidity;
+                    humidityEl.textContent = "Humidity: " + data.list[i].main.humidity + " %";
 
                     innerDiv.append(cityEl, dateEl, imgEl, tempEl, windEl, humidityEl);
                     let divEl = cardDiv.appendChild(innerDiv);
@@ -113,6 +114,7 @@ searchBtn.addEventListener('submit', function (event) {
         previousSearch.pop();
     }
 
+    // Clearing the text input box after every search
     textInput.value = '';
 });
 
@@ -121,6 +123,8 @@ textInput.addEventListener('click', function () {
 });
 
 function showHistory() {
+
+    // Creating html elements inside historyList
     historyList.innerHTML = '';
 
     for (let i = 0; i < previousSearch.length; i++) {

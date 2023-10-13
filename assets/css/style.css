@@ -1,8 +1,29 @@
-
+/* Declare all variables for later use */
+:root {
+    --font-family-sans-serif: 'Open Sans', sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --neon-blue: #97E1ED;
+    --wheat-field: #F4F2D4;
+    --gray-blue: #44536A;
+    --gold: #EFE79E;
+    --gray: #D3DCDA;
+    --river-bed: #48555B;
+    --orange: #F38950;
+    --whiskey: #E88553;
+    --neon-blue: #2EBDD1;
+    --shuttle-gray: #566679;
+    --white: white;
+    --darkgray: darkgray;
+    --black: black;
+    --charcoal: #444746;
+    --blue: #1183d6;
+    --gray-text: #bbb;
+}
 
 /* ================================================================ */
 html {
     height: 100%;
+    font-family: var(--font-family-sans-serif);
 }
 
 main {
@@ -12,9 +33,10 @@ main {
 .aside {
     /* display: flex;
     flex-direction: column;
-    padding: 1rem 1.5rem 1rem 1.5rem;
     float: left;
     width: 25%; */
+    width: 100%;
+    padding: 1rem 1.5rem 1rem 1.5rem;
     border: 1px solid red;
 }
 
@@ -24,8 +46,54 @@ main {
     display: flex;
     flex-direction: column; */
     border: 1px solid red;
+    width: 100%;
+}
+
+div.col-7 {
+    text-align: center;
 }
 
 .hide {
     display: none;
 }
+
+h1 {
+    text-align: center;
+}
+
+h4 {
+    color: red;
+}
+
+/* p {
+    color: red;
+} */
+
+label {
+    font-weight: bold;
+}
+
+.history {
+    border: 1px solid red;
+}
+
+div.five-day-forecast {
+  justify-content: center;
+}
+
+.five-day-forecast {
+    border: 1px solid black;
+    margin: 1rem;
+    padding: 2rem 2rem;
+    text-align: center;
+    justify-content: center;
+    vertical-align: middle;
+  }
+
+
+  div {
+    display: inline-block;
+    border: 1px solid red;
+    padding: 1rem 1rem;
+    vertical-align: middle;
+  }
