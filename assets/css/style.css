@@ -7,6 +7,8 @@
     --mindaro: rgb(243, 255, 182);
     --persian-orange: rgb(211, 139, 93);
     --golden-brown: rgb(153, 98, 30);
+    --white: white;
+    --black: black;
 }
 
 /* ================================================================ */
@@ -100,6 +102,7 @@ button {
 /* Including a different color when the history buttons are hovered on */
 button:hover {
     background-color: var(--persian-orange);
+    color: var(--white);
 }
 
 .history {
