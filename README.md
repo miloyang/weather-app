@@ -10,7 +10,7 @@ N/A
 
 ## Usage
 
-To use the Weather Dashboard Application, you can copy and paste this link into your browser: https://miloyang.github.io/Weather-App
+To use the Weather Dashboard Application, you can copy and paste this link into your browser: https://miloyang.github.io/weather-app/
 
 The page should open as per below screenshots:
 ![Screenshot of Portfolio Page](assets/images/Weather-App-Screenshot.png)
