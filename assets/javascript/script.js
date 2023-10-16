@@ -1,3 +1,4 @@
+// Defining the variables in order to select each classes and ids
 let searchBtn = document.querySelector('#search-form');
 let textInput = document.querySelector('#textInput');
 let historyEl = document.querySelector('.history');
@@ -9,7 +10,6 @@ let currentTemperature = document.querySelector('.current-temperature');
 let currentWind = document.querySelector('.current-wind');
 let currentHumidity = document.querySelector('.current-humidity');
 let fiveDay = document.querySelector('.five-day-forecast');
-// let counrtyCode = document.querySelector('#country');
 
 const apiKey = 'f8291849ba2ba581c967f471c596323b';
 
@@ -23,6 +23,7 @@ let city = function (cityName) {
     getForecast(inputValue);
 };
 
+// Fetching the current weather
 let getCurrentWeather = function (city) {
     let queryURL =
         'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&appid=' + apiKey;
@@ -44,6 +45,7 @@ let getCurrentWeather = function (city) {
         });
 };
 
+// Fetching the 5 days forecast
 let getForecast = function (city) {
     let queryURL =
         'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=metric&appid=' + apiKey;
@@ -54,12 +56,12 @@ let getForecast = function (city) {
         .then(function (data) {
             console.log(data);
             for (let i = 0; i < data.list.length; i++) {
+                // To filter through the 40 results to only get the 5 days result
                 if ((i + 1) % 8 === 0) {
+
+                    // Creating the div and all elements needed to display the 5 days forecast
                     const cardDiv = document.createElement('div');
                     const innerDiv = document.createElement('div');
-
-                    // const cityEl = document.createElement('h4');
-                    // cityEl.textContent = data.city.name;
 
                     const dateEl = document.createElement('h4');
                     dateEl.textContent = data.list[i].dt_txt;
@@ -79,6 +81,7 @@ let getForecast = function (city) {
                     const humidityEl = document.createElement('p');
                     humidityEl.textContent = "Humidity: " + data.list[i].main.humidity + " %";
 
+                    // Appending all the elements to the parent div
                     innerDiv.append(dateEl, imgEl, tempEl, windEl, humidityEl);
                     let divEl = cardDiv.appendChild(innerDiv);
                     fiveDay.append(divEl);
@@ -87,6 +90,7 @@ let getForecast = function (city) {
         });
 };
 
+// Adding an event listener to call the city function when a search is submitted
 searchBtn.addEventListener('submit', function (event) {
     event.preventDefault();
     city();
@@ -128,7 +132,7 @@ function showHistory() {
     historyList.innerHTML = '';
 
     for (let i = 0; i < previousSearch.length; i++) {
-        let newDiv = document.createElement('li');
+        let newDiv = document.createElement('div');
         newDiv.classList.add('historyItem');
 
         let aEl = document.createElement('button');

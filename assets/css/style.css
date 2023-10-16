@@ -2,22 +2,11 @@
 :root {
     --font-family-sans-serif: 'Open Sans', sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    --neon-blue: #97E1ED;
-    --wheat-field: #F4F2D4;
-    --gray-blue: #44536A;
-    --gold: #EFE79E;
-    --gray: #D3DCDA;
-    --river-bed: #48555B;
-    --orange: #F38950;
-    --whiskey: #E88553;
-    --neon-blue: #2EBDD1;
-    --shuttle-gray: #566679;
-    --white: white;
-    --darkgray: darkgray;
-    --black: black;
-    --charcoal: #444746;
-    --blue: #1183d6;
-    --gray-text: #bbb;
+    --cal-poly-green: rgb(44, 85, 48);
+    --cambridge-blue: rgb(115, 158, 130);
+    --mindaro: rgb(243, 255, 182);
+    --persian-orange: rgb(211, 139, 93);
+    --golden-brown: rgb(153, 98, 30);
 }
 
 /* ================================================================ */
@@ -31,32 +20,19 @@ main {
 }
 
 .aside {
-    /* display: flex;
-    flex-direction: column;
-    float: left;
-    width: 25%; */
     width: 100%;
-    /* padding: 1rem 1.5rem 1rem 1.5rem; */
-    border: 1px solid red;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    background-color: var(--cambridge-blue);
 }
 
 .article {
-    /* float: left;
-    width: 75%;
-    display: flex;
-    flex-direction: column; */
-    border: 1px solid red;
     width: 100%;
 }
 
 .container {
     width: 100%;
-    border: 1px solid black;
-    /* margin: 1rem;
-    padding: 2rem 2rem; */
     margin: 25px;
     padding: 15px;
     text-align: center;
@@ -70,11 +46,15 @@ main {
     text-align: left;
 }
 
+label {
+    font-weight: bold;
+    color: var(--black);
+}
+
 div.col-6 {
     justify-content: center;
     text-align: center;
     padding: 15px;
-    border: 1px solid yellow;
 }
 
 .current-weather {
@@ -92,21 +72,37 @@ h2 {
     font-weight: bold;
 }
 
+p {
+    font-weight: bold;
+}
+
+.btn {
+    color: var(--white);
+    background-color: var(--cal-poly-green);
+    width: 100%;
+}
+
+c
+.btn:hover {
+    background-color: var(--persian-orange);
+}
+
 button {
     color: var(--white);
-    background-color: gray;
+    background-color: var(--cal-poly-green);
     border-radius: 3px;
     padding: 5px;
     margin: 5px;
     display: inline-block;
+    width: 100%;
 }
 
-label {
-    font-weight: bold;
+/* Including a different color when the history buttons are hovered on */
+button:hover {
+    background-color: var(--persian-orange);
 }
 
 .history {
-    border: 1px solid red;
     padding: 10px;
     margin: 10px;
 }
@@ -116,7 +112,6 @@ label {
 }
 
 .five-day-forecast {
-    border: 1px solid black;
     margin: 1rem;
     padding: 2rem 2rem;
     text-align: center;
@@ -127,20 +122,13 @@ label {
 }
 
 .five-day-forecast div {
-    border: 1px solid blue;
     margin: 25px;
     padding: 10px;
-    color: white;
-    background-color: navy;
+    color: var(--black);
+    background-color: var(--cambridge-blue);
 }
 
-/* div {
-    display: inline-block;
-    border: 1px solid red;
-    padding: 1rem 1rem;
-    vertical-align: middle;
-} */
-
+/* The display will be hidden when this class is called */
 .hide {
     display: none;
 }
